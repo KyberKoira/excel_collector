@@ -1,0 +1,15 @@
+import openpyxl as op
+
+data = op.load_workbook('testidata.xlsx')
+kohde = op.Workbook()
+
+data_ws = data.active
+kohde_ws = kohde.active
+
+kohde_ws.cell(column = 1, row = 1).value = 'Sahkoposti'
+
+for row = 2 in data_ws.rows:
+	if data_ws.cell(column = 3, row = row) != 'x' and data_ws.cell(column = 4, row = row) != 'x':
+		kohde_ws.cell(column = 1, row = row).value = data_ws.cell(column = 2, row = row).value
+
+kohde.save(filename ='kohdedata.xlsx')
